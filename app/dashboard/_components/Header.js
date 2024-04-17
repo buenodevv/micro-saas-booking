@@ -1,16 +1,12 @@
 'use client'
 import React from 'react'
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from '@/components/ui/button';
-import { Home, Menu, Bell, Package2, Search, CircleUser, ShoppingCart, Package, Users, LineChart } from 'lucide-react';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { Bell} from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Image from 'next/image';
+import { ModeToggle } from '@/app/_components/ModeToggle';
 
 function Header() {
     const { user } = useKindeBrowserClient()
@@ -18,6 +14,7 @@ function Header() {
     return (
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
             <div className='flex w-full justify-end gap-4'>
+                <ModeToggle/>
                 <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
                     <Bell className="h-4 w-4" />
                     <span className="sr-only">Toggle notifications</span>
