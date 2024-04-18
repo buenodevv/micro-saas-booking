@@ -1,49 +1,82 @@
 'use client'
 import React from 'react'
+import { useState } from 'react'
+import { Button } from "@/components/ui/button"
 import {
     Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog"
-import { Table, TableBody, TableCell, TableHead, TableHeadCell } from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import { PlusIcon } from 'lucide-react'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { prisma } from '@/app/lib/prisma'
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { handleCreateDoctor, prisma } from '@/app/lib/prisma'
+
 async function Doctors() {
-const doctors = await prisma.doctor.findMany()    
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [specialty, setSpecialty] = useState("")
+   
     return (
         <div>
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button><PlusIcon/>Salvar</Button>
+                    <Button >Adicionar</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                     <DialogHeader>
                         <DialogTitle>Share link</DialogTitle>
                         <DialogDescription>
-                            Anyone who has this link will be able to view this.
+                            Cadastro de Médico
                         </DialogDescription>
                     </DialogHeader>
                     <div className="flex items-center space-x-2">
                         <div className="grid flex-1 gap-2">
-                            <Label htmlFor="link" className="sr-only">
-                                Link
+                            <Label htmlFor="nome">
+                                Nome
                             </Label>
                             <Input
-                                id="link"
-                                defaultValue="https://ui.shadcn.com/docs/installation"
-                                readOnly
+                                id="nome"
+                                defaultValue="Nome"
+                                type="text"
+                                onchange={(e) => setName(e.target.value)}
+                            />
+                            <Label htmlFor="email">
+                                Email
+                            </Label>
+                            <Input
+                                id="email"
+                                defaultValue="email"
+                                type="email"
+                                onchange={(e) => setEmail(e.target.value)}
+                            />
+                            <Label htmlFor="phone">
+                                Telefone
+                            </Label>
+                            <Input
+                                id="phone"
+                                defaultValue="Nome"
+                                type="text"
+                                onchange={(e) => setPhone(e.target.value)}
+                            />
+                            <Label htmlFor="specialty">
+                                Especialidade
+                            </Label>
+                            <Input
+                                id="specialty"
+                                defaultValue="Especialidade"
+                                type="text"
+                                onchange={(e) => setSpecialty(e.target.value)}
                             />
                         </div>
                     </div>
                     <DialogFooter className="sm:justify-start">
+                        <Button onclick={handleCreateDoctor(name, email, phone, specialty)} disabled={name == "true"}>Salvar</Button>
                         <DialogClose asChild>
                             <Button type="button" variant="secondary">
                                 Close
@@ -52,22 +85,7 @@ const doctors = await prisma.doctor.findMany()
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        <Table>
-            <TableHead >Nome</TableHead>
-            <TableHead >Especialidade</TableHead>
-            <TableHead >Email</TableHead>
-                {doctors.map((doctor) => (
-            <TableBody>
-                    <TableCell>{doctor.name}</TableCell>
-                    <TableCell>{doctor.specialty}</TableCell>
-                    <TableCell>{doctor.email}</TableCell>
-            </TableBody>
-                ))}
-
-            
-        </Table>
         </div>
-
     )
 }
 
