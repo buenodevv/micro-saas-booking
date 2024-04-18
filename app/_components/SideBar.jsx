@@ -35,11 +35,11 @@ function SideBar() {
               Patients
             </Link>
             <Link
-              href="#"
-              className={`flex items-center gap-3 rounded-lg ${path === '/dashboard/products' && 'bg-muted text-primary'} px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted `}
+              href="dashboard/doctors"
+              className={`flex items-center gap-3 rounded-lg ${path === '/dashboard/doctors' && 'bg-muted text-primary'} px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted `}
             >
               <Package className="h-4 w-4" />
-              Products{" "}
+              Doctors
             </Link>
             <Link
               href="#"

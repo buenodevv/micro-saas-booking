@@ -1,13 +1,19 @@
+'use server'
 import { redirect } from 'next/navigation'
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import React from 'react'
 import { Users } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { prisma } from '../lib/prisma';
 
 async function Dashboard() {
+const tickets = await prisma.patient.findMany()
+  
   const { isAuthenticated } = getKindeServerSession()
+  console.log(tickets)
   return (await isAuthenticated()) ? (
+    
     <div className='grid grid-cols-3 gap-4'>
     <Card x-chunk="dashboard-01-chunk-1">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -84,6 +90,9 @@ async function Dashboard() {
         </p>
       </CardContent>
     </Card>
+    {tickets.map((ticket) => (
+      <h1>{ticket.name}</h1>
+    ))}
     </div>
   ) : redirect('/login')
 

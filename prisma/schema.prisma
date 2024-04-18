@@ -12,9 +12,42 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-model Ticket {
-  id        Int      @id @default(autoincrement())
-  description String
-  status    String
-  user      String
+
+model User {
+  id        String      @id @default(uuid())
+  name      String
+  email     String
+  password  String
+}
+model Patient {
+  id        String      @id @default(uuid())
+  name      String @unique
+  email     String
+  telephone String
+  status    String @default("active")
+
+  bookings  Booking[]
+}
+model Doctor {
+  id        String      @id @default(uuid())
+  name      String
+  email     String @unique
+  telephone String
+  specialty String
+  image_url String?
+  status    String @default("active")
+
+  bookings  Booking[]
+  
+}
+model Booking {
+  id        String      @id @default(uuid())
+  patientId   String
+  doctorId   String
+  date      DateTime
+  time      DateTime
+  status    String @default("pending")
+  
+  patient Patient @relation(fields: [patientId], references: [id])
+  doctor  Doctor  @relation(fields: [doctorId], references: [id])
 }
