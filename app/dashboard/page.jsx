@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import { prisma } from '../lib/prisma';
 
 async function Dashboard() {
-const tickets = await prisma.patient.findMany()
+
   
   const { isAuthenticated } = getKindeServerSession()
   console.log(tickets)
@@ -90,9 +90,7 @@ const tickets = await prisma.patient.findMany()
         </p>
       </CardContent>
     </Card>
-    {tickets.map((ticket) => (
-      <h1>{ticket.name}</h1>
-    ))}
+    
     </div>
   ) : redirect('/login')
 

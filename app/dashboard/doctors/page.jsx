@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { handleCreateDoctor, prisma } from '@/app/lib/prisma'
 
-async function Doctors() {
+function Doctors() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
@@ -40,43 +40,46 @@ async function Doctors() {
                             <Label htmlFor="nome">
                                 Nome
                             </Label>
-                            <Input
-                                id="nome"
-                                defaultValue="Nome"
-                                type="text"
-                                onchange={(e) => setName(e.target.value)}
-                            />
+                           <Input
+                           placeholder="Digite o nome"
+                           type="text"
+                           value={name}                          
+                           onChange={(e) => setName(e.target.value)}
+                           />
                             <Label htmlFor="email">
                                 Email
                             </Label>
                             <Input
                                 id="email"
-                                defaultValue="email"
+                                placeholder="Digite o email"
                                 type="email"
-                                onchange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                             <Label htmlFor="phone">
                                 Telefone
                             </Label>
                             <Input
                                 id="phone"
-                                defaultValue="Nome"
+                                placeholder="Digite o telefone"
                                 type="text"
-                                onchange={(e) => setPhone(e.target.value)}
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                             />
                             <Label htmlFor="specialty">
                                 Especialidade
                             </Label>
                             <Input
                                 id="specialty"
-                                defaultValue="Especialidade"
+                                placeholder="Digite a especialidade"
                                 type="text"
-                                onchange={(e) => setSpecialty(e.target.value)}
+                                value={specialty}
+                                onChange={(e) => setSpecialty(e.target.value)}
                             />
                         </div>
                     </div>
                     <DialogFooter className="sm:justify-start">
-                        <Button onclick={handleCreateDoctor(name, email, phone, specialty)} disabled={name == "true"}>Salvar</Button>
+                        <Button disabled={!name || !email || !phone || !specialty}>Salvar</Button>
                         <DialogClose asChild>
                             <Button type="button" variant="secondary">
                                 Close
