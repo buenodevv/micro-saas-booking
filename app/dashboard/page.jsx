@@ -5,13 +5,12 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import React from 'react'
 import { Users } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
-import { prisma } from '../lib/prisma';
+
 
 async function Dashboard() {
 
   
   const { isAuthenticated } = getKindeServerSession()
-  console.log(tickets)
   return (await isAuthenticated()) ? (
     
     <div className='grid grid-cols-3 gap-4'>
