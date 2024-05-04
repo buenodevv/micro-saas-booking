@@ -19,7 +19,7 @@ import { Label } from "@/components/ui/label";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 
-function Doctors() {
+function inputDoctorCreate() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [telephone, setPhone] = useState("");
@@ -130,4 +130,4 @@ function Doctors() {
   );
 }
 
-export default Doctors;
+export default inputDoctorCreate;
